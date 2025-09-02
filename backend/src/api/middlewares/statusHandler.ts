@@ -1,12 +1,7 @@
 /* ---------- Mensagens de status ---------- */
 
 import type { NextFunction, Request, Response } from "express";
-
-// Uma interface customizável para lidar com erros de código
-interface CustomError extends Error {
-  status?: number;
-  statusCode?: number;
-}
+import type { CustomError } from "../../utils/customError.js";
 
 // Mensagens de resposta dos status
 const getStatusMessage = (status: number): string => {
@@ -15,6 +10,7 @@ const getStatusMessage = (status: number): string => {
     200: "OK",
     201: "CREATED",
     400: "BAD REQUEST",
+    401: "UNAUTHORIZED",
     404: "NOT FOUND",
     500: "INTERNAL SERVER ERROR",
     503: "BAD GATEWAY",
@@ -66,7 +62,7 @@ export const errorHandler = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   // Envia a mensagem padrão caso já tenha sido dada a resposta
   if (res.headersSent) {
     return next(error);

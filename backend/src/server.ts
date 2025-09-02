@@ -1,6 +1,7 @@
 /* ---------- Servidor ---------- */
 
 import dotenv from "dotenv";
+import "dotenv/config";
 import app from "./app.js";
 import dbConnection from "./config/db.js";
 
