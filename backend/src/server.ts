@@ -1,8 +1,16 @@
-import express from "express";
+/* ---------- Servidor ---------- */
 
-const app = express();
-const PORT = 3000;
+import dotenv from "dotenv";
+import app from "./app.js";
+import dbConnection from "./config/db.js";
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Configuração do .env
+dotenv.config();
+
+const PORT = process.env.PORT! || 8000;
+
+dbConnection().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
