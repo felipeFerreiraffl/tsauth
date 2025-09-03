@@ -1,4 +1,4 @@
-/* ---------- Serviço de autenticação ---------- */
+/* ---------- 🔒 Service de autenticação ---------- */
 
 import jwt from "jsonwebtoken";
 

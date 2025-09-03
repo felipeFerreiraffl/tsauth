@@ -1,4 +1,4 @@
-/* ---------- Rotas de autenticação ---------- */
+/* ---------- 🔒 Rotas de autenticação ---------- */
 
 import { Router } from "express";
 import { AuthController } from "../controllers/auth.js";

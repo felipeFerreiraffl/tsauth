@@ -1,4 +1,4 @@
-/* ---------- Mensagens de status ---------- */
+/* ---------- 🧾 Mensagens de status ---------- */
 
 import type { NextFunction, Request, Response } from "express";
 import type { CustomError } from "../../utils/customError.js";

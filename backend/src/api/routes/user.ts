@@ -1,4 +1,4 @@
-/* ---------- Rotas de usuários ---------- */
+/* ---------- 👥 Rotas de usuários ---------- */
 
 import { Router } from "express";
 import { UserController } from "../controllers/user.js";

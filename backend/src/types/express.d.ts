@@ -1,4 +1,4 @@
-/* ---------- Payload personalizado para JWT ---------- */
+/* ---------- 🗝️ Payload personalizado para JWT ---------- */
 
 import type { JwtPayload } from "jsonwebtoken";
 

@@ -1,4 +1,4 @@
-/* ---------- Controladores de usuários ---------- */
+/* ---------- 👥 Controladores de usuários ---------- */
 
 import type { NextFunction, Request, Response } from "express";
 import { UserService } from "../services/user.js";

@@ -1,4 +1,4 @@
-/* ---------- Autenticação JWT ---------- */
+/* ---------- 🔑 Autenticação JWT ---------- */
 
 import type { NextFunction, Request, Response } from "express";
 import pkg, { type JwtPayload } from "jsonwebtoken";

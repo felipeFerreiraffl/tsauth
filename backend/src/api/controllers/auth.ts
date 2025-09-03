@@ -1,4 +1,4 @@
-/* ---------- Controladores de autenticação ---------- */
+/* ---------- 🔒 Controladores de autenticação ---------- */
 
 import type { NextFunction, Request, Response } from "express";
 import { setSuccessStatus } from "../middlewares/statusHandler.js";

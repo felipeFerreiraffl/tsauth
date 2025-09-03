@@ -1,4 +1,4 @@
-/* ---------- Autorização de administrador ---------- */
+/* ---------- 🕴️ Autorização de administrador ---------- */
 import type { NextFunction, Request, Response } from "express";
 import type { CustomError } from "../../utils/customError.js";
 

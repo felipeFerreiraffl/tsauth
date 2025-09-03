@@ -1,4 +1,4 @@
-/* ---------- Serviços ---------- */
+/* ---------- 👥 Service de usuários ---------- */
 
 import type { Document } from "mongoose";
 import User from "../models/user.js";

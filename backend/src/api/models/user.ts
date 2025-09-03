@@ -1,4 +1,4 @@
-/* ---------- Classes de modelo ---------- */
+/* ---------- 👤 Classes de modelo ---------- */
 
 import bcrypt from "bcryptjs";
 import mongoose, { Schema } from "mongoose";

@@ -1,4 +1,4 @@
-/* ---------- Conexão com o MongoDB ---------- */
+/* ---------- 💾 Conexão com o MongoDB ---------- */
 
 import mongoose from "mongoose";
 
