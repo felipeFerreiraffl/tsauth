@@ -32,4 +32,28 @@ export class UserService {
       throw error;
     }
   }
+
+  // Buscar usuário por ID
+  static async getUserById(userId: string | undefined): Promise<Document> {
+    try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        const error: CustomError = new Error("User not found");
+        error.status = 404;
+        throw error;
+      }
+
+      return user;
+    } catch (error: any) {
+      if (error.name === "CastError") {
+        const customError: CustomError = new Error(
+          `Invalid user ID format: ${error.message}`
+        );
+        customError.status = 400;
+        throw customError;
+      }
+      throw error;
+    }
+  }
 }

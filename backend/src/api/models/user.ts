@@ -7,6 +7,7 @@ export interface IUser {
   username: string;
   email: string;
   password: string;
+  role: "user" | "admin";
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -22,6 +23,7 @@ const userSchema = new Schema<IUser>(
       trim: true,
     },
     password: { type: String, required: true, minlength: 6 },
+    role: { type: String, enum: ["user", "admin"], default: "user" },
   },
   { timestamps: true }
 );

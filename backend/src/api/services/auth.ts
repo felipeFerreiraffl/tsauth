@@ -12,6 +12,7 @@ export class AuthService {
     username: string;
     email: string;
     password: string;
+    role?: "user" | "admin";
   }) {
     try {
       const existingUser = await User.findOne({
@@ -37,6 +38,7 @@ export class AuthService {
           userId: user._id,
           username: user.username,
           email: user.username,
+          role: user.role,
         },
         process.env.SECRET_KEY as string,
         { expiresIn: "7d" }
@@ -86,6 +88,7 @@ export class AuthService {
           userId: user._id,
           username: user.username,
           email: user.username,
+          role: user.role,
         },
         process.env.SECRET_KEY as string,
         { expiresIn: "7d" }
