@@ -1,9 +1,8 @@
 /* ---------- Controladores de autenticação ---------- */
 
 import type { NextFunction, Request, Response } from "express";
-import { AuthService } from "../services/auth.js";
 import { setSuccessStatus } from "../middlewares/statusHandler.js";
-import User from "../models/user.js";
+import { AuthService } from "../services/auth.js";
 
 export class AuthController {
   // GET /auth/login
@@ -18,10 +17,16 @@ export class AuthController {
         req.body.password
       );
 
-      setSuccessStatus(200, res, "Performed login successfully").json({
+      setSuccessStatus(200, res).json({
         user,
         token,
       });
+
+      // res.json({
+      //   message: "Performed login successfully",
+      //   user,
+      //   token,
+      // });
     } catch (error) {
       next(error);
     }
@@ -36,7 +41,8 @@ export class AuthController {
     try {
       const { user, token } = await AuthService.register(req.body);
 
-      setSuccessStatus(200, res, "Performed login successfully").json({
+      res.json({
+        message: "Performed login successfully",
         user,
         token,
       });

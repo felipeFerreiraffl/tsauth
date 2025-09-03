@@ -4,8 +4,6 @@ import type { NextFunction, Request, Response } from "express";
 import pkg, { type JwtPayload } from "jsonwebtoken";
 import type { CustomError } from "../../utils/customError.js";
 
-const { verify } = pkg;
-
 declare global {
   namespace Express {
     interface Request {
@@ -32,6 +30,8 @@ export default function auth(
 
     // Extração do token do header
     const auth = req.headers.authorization;
+    console.log(`Extracted Header: ${auth}`);
+
     if (!auth) {
       throw new Error("JWT missing!");
     }
@@ -46,7 +46,8 @@ export default function auth(
     }
 
     // Extrai o token (remove o "Bearer " no index 7)
-    const token = auth.substring(7);
+    const token = auth.substring(7).trim();
+    console.log(`Token: ${token}`);
 
     // Caso o token não esteja presente, lança um erro
     if (!token) {
@@ -56,20 +57,25 @@ export default function auth(
     }
 
     // Decodificação e adiciona as informações à requisição do usuário
-    const decoded = verify(token, jwt.secret);
+    const decoded = pkg.verify(token, jwt.secret);
+    console.log(`Decoded token: ${decoded}`);
     req.user = decoded;
 
     next(); // Próximo middleware
   } catch (error: any) {
-    // Mapeação do erro dp JWT
+    // Mapeação do erro do JWT
     if (error.name === "TokenExpiredError") {
-      const customError: CustomError = new Error("Expired token");
+      const customError: CustomError = new Error(
+        `Expired token: ${error.message}`
+      );
       customError.status = 401;
       return next(customError);
     }
 
     if (error.name === "JsonWebTokenError") {
-      const customError: CustomError = new Error("Invalid token");
+      const customError: CustomError = new Error(
+        `Invalid token: ${error.message}`
+      );
       customError.status = 401;
       return next(customError);
     }

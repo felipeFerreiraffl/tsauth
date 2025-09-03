@@ -30,7 +30,7 @@ export const successLogger = (
   res.send = function (body: any) {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       console.log(
-        `Success: ${res.statusCode} ${getStatusMessage(res.statusCode)}`
+        `Success - ${res.statusCode} ${getStatusMessage(res.statusCode)}`
       );
     }
 
@@ -41,17 +41,9 @@ export const successLogger = (
 };
 
 // Permite definir o número do status do HTTP de sucesso
-export const setSuccessStatus = (
-  status: number,
-  res: Response,
-  message?: string
-): Response => {
+export const setSuccessStatus = (status: number, res: Response): Response => {
   res.status(status);
-  console.log(`Success: ${status} ${getStatusMessage(status)}`);
-
-  if (message) {
-    return res.json({ message: message });
-  }
+  console.log(`Success - ${status} ${getStatusMessage(status)}`);
 
   return res;
 };

@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 // Rotas de autenticação
-app.use("api/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 // Rotas do usuário
 app.use("/api/users", userRouter);

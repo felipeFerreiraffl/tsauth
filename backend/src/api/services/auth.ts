@@ -60,7 +60,7 @@ export class AuthService {
         throw error;
       }
 
-      //   Busca por email ou username e inclui a senha
+      // Busca por email ou username e inclui a senha
       const user = await User.findOne({
         $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
       }).select("+password");
