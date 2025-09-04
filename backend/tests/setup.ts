@@ -1,12 +1,16 @@
 /* ---------- 🧪 Setup do Jest ---------- */
 
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import { MongoMemoryServer } from "mongodb-memory-server";
+// import mongoose from "mongoose";
+// import dotenv from "dotenv";
+// import { MongoMemoryServer } from "mongodb-memory-server";
+
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const { MongoMemoryServer } = require("mongodb-memory-server");
 
 dotenv.config();
 
-let mongoServer: MongoMemoryServer;
+let mongoServer: any;
 
 beforeAll(async () => {
   // Cria um servidor em memória para testes

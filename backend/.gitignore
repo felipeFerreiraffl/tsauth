@@ -1,3 +1,12 @@
-node_modules
-dist
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+
+# Environment variables
 .env
+
+# IDF
+.vscode/
