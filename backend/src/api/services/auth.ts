@@ -2,8 +2,8 @@
 
 import jwt from "jsonwebtoken";
 
-import type { CustomError } from "../../utils/customError.js";
-import User from "../models/user.js";
+import type { CustomError } from "../../utils/customError";
+import User from "../models/user";
 
 // Classe de autenticação de usuário
 export class AuthService {

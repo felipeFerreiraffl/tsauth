@@ -1,9 +1,9 @@
 /* ---------- 👥 Rotas de usuários ---------- */
 
 import { Router } from "express";
-import { UserController } from "../controllers/user.js";
-import auth from "../middlewares/auth.js";
-import { requireAdmin, requireOwnerOrAdmin } from "../middlewares/authRole.js";
+import { UserController } from "../controllers/user";
+import auth from "../middlewares/auth";
+import { requireAdmin, requireOwnerOrAdmin } from "../middlewares/authRole";
 
 const userRouter = Router();
 

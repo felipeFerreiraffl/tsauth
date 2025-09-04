@@ -1,6 +1,6 @@
 /* ---------- 🕴️ Autorização de administrador ---------- */
 import type { NextFunction, Request, Response } from "express";
-import type { CustomError } from "../../utils/customError.js";
+import type { CustomError } from "../../utils/customError";
 
 // Verifica se é administrador
 export const requireAdmin = (

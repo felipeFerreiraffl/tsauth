@@ -1,10 +1,7 @@
 /* ---------- 🧪 Teste de usuários ---------- */
 
-// import request from "supertest";
-// import app from "../src/app.js";
-
-const request = require("supertest");
-const app = require("../src/app");
+import request from "supertest";
+import app from "../src/app";
 
 describe("User Routes", () => {
   let authToken: string;

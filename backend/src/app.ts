@@ -4,9 +4,9 @@ import express from "express";
 import {
   errorHandler,
   notFoundHandler,
-} from "./api/middlewares/statusHandler.js";
-import userRouter from "./api/routes/user.js";
-import authRouter from "./api/routes/auth.js";
+} from "./api/middlewares/statusHandler";
+import userRouter from "./api/routes/user";
+import authRouter from "./api/routes/auth";
 
 // Instacia o express
 const app = express();

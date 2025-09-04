@@ -1,8 +1,8 @@
 /* ---------- 🔒 Controladores de autenticação ---------- */
 
 import type { NextFunction, Request, Response } from "express";
-import { setSuccessStatus } from "../middlewares/statusHandler.js";
-import { AuthService } from "../services/auth.js";
+import { setSuccessStatus } from "../middlewares/statusHandler";
+import { AuthService } from "../services/auth";
 
 export class AuthController {
   // GET /auth/login

@@ -1,9 +1,9 @@
 /* ---------- 🔑 Autenticação JWT ---------- */
 
 import type { NextFunction, Request, Response } from "express";
-import pkg, { type JwtPayload } from "jsonwebtoken";
-import type { CustomError } from "../../utils/customError.js";
-import type { CustomJwtPayload } from "../../types/express.js";
+import pkg from "jsonwebtoken";
+import type { CustomJwtPayload } from "../../types/express";
+import type { CustomError } from "../../utils/customError";
 
 // Chave secreta do JWT
 const jwt = {

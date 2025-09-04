@@ -1,8 +1,8 @@
 /* ---------- 👥 Service de usuários ---------- */
 
 import type { Document } from "mongoose";
-import User from "../models/user.js";
-import type { CustomError } from "../../utils/customError.js";
+import User from "../models/user";
+import type { CustomError } from "../../utils/customError";
 
 // @Service
 // Não conhece Express, apenas repassa informações do Mongo

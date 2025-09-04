@@ -1,12 +1,14 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    "rootDir": "./src", // Diretório raiz do projeto
-    "outDir": "./dist", // Diretório onde rodará o TS
-    "module": "nodenext", // Módulos de TS
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
-    "target": "esnext",
     "types": [],
+    "allowImportingTsExtensions": false,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
@@ -14,7 +16,7 @@
     "exactOptionalPropertyTypes": true,
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",

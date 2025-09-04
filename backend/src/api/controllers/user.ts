@@ -1,10 +1,8 @@
 /* ---------- 👥 Controladores de usuários ---------- */
 
 import type { NextFunction, Request, Response } from "express";
-import { UserService } from "../services/user.js";
-import { setSuccessStatus } from "../middlewares/statusHandler.js";
-import User from "../models/user.js";
-import type { CustomError } from "../../utils/customError.js";
+import { setSuccessStatus } from "../middlewares/statusHandler";
+import { UserService } from "../services/user";
 
 export class UserController {
   // GET /users
