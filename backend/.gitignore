@@ -10,3 +10,6 @@ build/
 
 # IDF
 .vscode/
+
+# Jest
+coverage/
