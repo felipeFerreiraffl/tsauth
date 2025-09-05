@@ -120,11 +120,11 @@ export class UserService {
         delete updateData.role;
       }
 
-      // Atualização do usuário
-      const updatedUser = await User.findByIdAndUpdate(targetId, updateData, {
-        new: true, // Retorna o documento atualizado
-        runValidators: true, // Validações do modelo
-      });
+      // Atualiza os dados do usuário existente
+      Object.assign(existingUser, updateData);
+
+      // Atualização do usuário (salva com os hooks pre("save"))
+      const updatedUser = await existingUser.save();
 
       // Verifica se o usuário foi atualizado
       if (!updatedUser) {
@@ -154,7 +154,7 @@ export class UserService {
       }
 
       // Erro de chave duplicada
-      if (error.name === 11000) {
+      if (error.code === 11000) {
         const customError: CustomError = new Error("Email already exists");
         customError.status = 409;
         throw customError;

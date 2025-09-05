@@ -1,28 +1,29 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "target": "es2022",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "esModuleInterop": true,
-    "types": [],
-    "allowImportingTsExtensions": false,
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": false,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-    "noImplicitAny": true
+    // Estrutura
+    "rootDir": "./src", // Arquivos fonte
+    "outDir": "./dist", // Arquivos compilados (build)
+
+    // Compilação
+    "target": "es2022", // Versão do JavaScript de saída (Node.js moderno)
+    "module": "esnext", // ES Modules
+    "moduleResolution": "bundler", // Resolução de módulos
+    "esModuleInterop": true, // Compatibilidade com módulos CommonJS/ES
+
+    // Verificação de tipo
+    "strict": true, // Ativa as verificações de TypeScript
+    "noUncheckedIndexedAccess": true, // Segurança com acesso a arrays/objetos
+    "exactOptionalPropertyTypes": true, // Maior rigor com props opcionais
+
+    // Geração de arquivos
+    "sourceMap": true, // Debbuging
+
+    // Otimização e compatibilidade
+    "skipLibCheck": true, // Pula a verificação dos tipos node_modules
+    "isolatedModules": true, // Compatibilidade com bundles modernos
+    "moduleDetection": "force" // Força a detecção de módulos
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build", "**/*/*.test.ts"]
 }
