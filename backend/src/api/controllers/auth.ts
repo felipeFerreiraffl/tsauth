@@ -13,7 +13,7 @@ export class AuthController {
   ): Promise<void> {
     try {
       const { user, token } = await AuthService.login(
-        req.body.email,
+        req.body.email || req.body.username,
         req.body.password
       );
 
