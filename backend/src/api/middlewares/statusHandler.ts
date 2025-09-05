@@ -13,11 +13,12 @@ const getStatusMessage = (status: number): string => {
     401: "UNAUTHORIZED",
     403: "FORBIDDEN",
     404: "NOT FOUND",
+    409: "CONFLICT",
     500: "INTERNAL SERVER ERROR",
-    503: "BAD GATEWAY",
+    503: "SERVICE UNAVAILABLE",
   };
 
-  return statusMessage[status] || "UNKOWN";
+  return statusMessage[status] || "UNKNOWN";
 };
 
 // Respostas de sucesso (>=200)
@@ -71,7 +72,7 @@ export const errorHandler = (
       ? "Internal Server Error"
       : message;
 
-  res.json({
+  res.status(status).json({
     error: true,
     status,
     message: responseMessage,

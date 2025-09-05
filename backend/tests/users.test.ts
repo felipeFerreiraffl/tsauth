@@ -77,14 +77,16 @@ describe("User Routes", () => {
     // Retorna um erro por um usuário tentar acessar ID de um usuário sem ser administrador
     it("should return a forbidden when acessing other user without admin role", async () => {
       const otherUserResponse = await request(app)
-        .post("/api/auth/resgister")
+        .post("/api/auth/register")
         .send({
           username: "normal user",
           email: "normal@email.com",
           password: "123456",
         });
 
-      const otherUserId = otherUserResponse.body.user._id;
+      const otherUser = otherUserResponse.body.user;
+      expect(otherUser).toBeDefined();
+      const otherUserId = otherUser._id;
 
       const response = await request(app)
         .get(`/api/users/${otherUserId}`)

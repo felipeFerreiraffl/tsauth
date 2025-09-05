@@ -3,7 +3,7 @@
 import type { JwtPayload } from "jsonwebtoken";
 
 interface CustomJwtPayload extends JwtPayload {
-  userId: string;
+  userId: string | undefined;
   username: string;
   email: string;
   role: "user" | "admin";
@@ -12,7 +12,7 @@ interface CustomJwtPayload extends JwtPayload {
 declare global {
   namespace Express {
     interface Request {
-      user?: CustomJwtPayload;
+      user?: CustomJwtPayload | undefined;
     }
   }
 }

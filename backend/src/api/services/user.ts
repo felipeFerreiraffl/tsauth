@@ -34,13 +34,30 @@ export class UserService {
   }
 
   // Buscar usuário por ID
-  static async getUserById(userId: string | undefined): Promise<Document> {
+  static async getUserById(
+    userId: string | undefined,
+    requestUserId: string | undefined,
+    requestUserRole: string | undefined
+  ): Promise<Document> {
     try {
       const user = await User.findById(userId);
 
       if (!user) {
         const error: CustomError = new Error("User not found");
         error.status = 404;
+        throw error;
+      }
+
+      const userIdString = user._id.toString();
+      const requestUserIdString = requestUserId?.toString();
+
+      // Validação do usuário do ID ou admin
+      const isOwner = userIdString === requestUserIdString;
+      const isAdmin = requestUserRole === "admin";
+      
+      if (!isOwner && !isAdmin) {
+        const error: CustomError = new Error("Access denied");
+        error.status = 403;
         throw error;
       }
 

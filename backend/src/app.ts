@@ -1,10 +1,7 @@
 /* ---------- 📱 Express ---------- */
 
 import express from "express";
-import {
-  errorHandler,
-  notFoundHandler,
-} from "./api/middlewares/statusHandler";
+import { errorHandler, notFoundHandler } from "./api/middlewares/statusHandler";
 import userRouter from "./api/routes/user";
 import authRouter from "./api/routes/auth";
 
@@ -19,8 +16,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 
 // Erros
-app.use(errorHandler);
 app.use(notFoundHandler);
-
+app.use(errorHandler);
 
 export default app;

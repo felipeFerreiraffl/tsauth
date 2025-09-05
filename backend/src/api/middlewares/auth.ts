@@ -24,8 +24,11 @@ export default function auth(
     // Extração do token do header
     const auth = req.headers.authorization;
 
+    // Lança um erro caso o JWT não esteja presente
     if (!auth) {
-      throw new Error("JWT missing!");
+      const error: CustomError = new Error("JWT missing!");
+      error.status = 401;
+      throw error;
     }
 
     // Caso não utiliza a autenticação Bearer, lança um erro
@@ -50,6 +53,8 @@ export default function auth(
     // Decodificação e adiciona as informações à requisição do usuário
     const decoded = pkg.verify(token, jwt.secret) as CustomJwtPayload;
     req.user = decoded;
+
+    console.log(req.user);
 
     next(); // Próximo middleware
   } catch (error: any) {

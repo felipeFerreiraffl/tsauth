@@ -35,18 +35,29 @@ export class AuthService {
       // Gera JWT com dados não sensíveis
       const token = jwt.sign(
         {
-          userId: user._id,
+          userId: user._id.toString(),
           username: user.username,
-          email: user.username,
+          email: user.email,
           role: user.role,
         },
-        process.env.SECRET_KEY as string,
+        process.env.SECRET_KEY! as string,
         { expiresIn: "7d" }
       );
 
       // Retorna usuário (sem senha) e JWT
       return { user: user.toJSON(), token };
     } catch (error: any) {
+      // Erro de validação de email
+      if (error.name === "ValidationError") {
+        const customError: CustomError = new Error(
+          Object.values(error.errors)
+            .map((err: any) => err.message)
+            .join(", ")
+        );
+        customError.status = 400;
+        throw customError;
+      }
+
       throw error;
     }
   }
@@ -85,12 +96,12 @@ export class AuthService {
       // Gera JWT com dados não sensíveis
       const token = jwt.sign(
         {
-          userId: user._id,
+          userId: user._id.toString(),
           username: user.username,
-          email: user.username,
+          email: user.email,
           role: user.role,
         },
-        process.env.SECRET_KEY as string,
+        process.env.SECRET_KEY! as string,
         { expiresIn: "7d" }
       );
 

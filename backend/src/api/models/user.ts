@@ -11,6 +11,9 @@ export interface IUser {
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
+// Regex do email para validação
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 // Montagem do esquema de modelo do MongoDB
 const userSchema = new Schema<IUser>(
   {
@@ -21,6 +24,12 @@ const userSchema = new Schema<IUser>(
       unique: true,
       lowercase: true,
       trim: true,
+      validate: {
+        validator: function (email: string) {
+          return emailRegex.test(email);
+        },
+        message: "Invalid email format",
+      },
     },
     password: { type: String, required: true, minlength: 6 },
     role: { type: String, enum: ["user", "admin"], default: "user" },

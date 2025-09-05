@@ -41,7 +41,7 @@ export class AuthController {
     try {
       const { user, token } = await AuthService.register(req.body);
 
-      res.json({
+      setSuccessStatus(200, res).json({
         message: "Performed login successfully",
         user,
         token,

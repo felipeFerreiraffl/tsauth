@@ -34,7 +34,7 @@ describe("Auth Routes", () => {
       const response = await request(app)
         .post("/api/auth/register")
         .send(userTest)
-        .expect(400);
+        .expect(409);
 
       // Retorna o erro
       expect(response.body).toHaveProperty("error", true);

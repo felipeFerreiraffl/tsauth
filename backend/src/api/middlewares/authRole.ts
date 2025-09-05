@@ -37,7 +37,7 @@ export const requireOwnerOrAdmin = (
 
     // Permissão de acessar os dados caso seja admin ou seja o próprio usuário
     if (userRole === "admin" || tokenId === requiredUserId) {
-      next();
+      return next();
     }
 
     // Por padrão, lança um erro de acesso
