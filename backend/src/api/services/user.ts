@@ -54,7 +54,7 @@ export class UserService {
       // Validação do usuário do ID ou admin
       const isOwner = userIdString === requestUserIdString;
       const isAdmin = requestUserRole === "admin";
-      
+
       if (!isOwner && !isAdmin) {
         const error: CustomError = new Error("Access denied");
         error.status = 403;
@@ -72,5 +72,68 @@ export class UserService {
       }
       throw error;
     }
+  }
+
+  // Atualiza um usuário
+  static async updateUser(
+    targetId: string | undefined,
+    updateData: any,
+    requestUserId: string | undefined,
+    requestUserRole: string | undefined
+  ): Promise<Document> {
+    try {
+      // Verifica se o usuário existe
+      const existingUser = await User.findById(targetId);
+
+      // Verifica se o usuário a ser atualizado existe
+      if (!existingUser) {
+        const error: CustomError = new Error("User not found");
+        error.status = 404;
+        throw error;
+      }
+
+      const targetUserIdString = existingUser._id.toString();
+      const requestUserIdString = requestUserId?.toString();
+
+      // Validação do usuário do ID ou admin
+      const isOwner = targetUserIdString === requestUserIdString;
+      const isAdmin = requestUserRole === "admin";
+
+      if (!isOwner && !isAdmin) {
+        const error: CustomError = new Error("Access denied");
+        error.status = 403;
+        throw error;
+      }
+
+      // Validação dos dados de entrada
+      if (!updateData || Object.keys(updateData).length === 0) {
+        const error: CustomError = new Error("No data provided for update");
+        error.status = 400;
+        throw error;
+      }
+
+      const protectedInfos = ["_id", "__v", "createdAt"];
+      protectedInfos.forEach((info) => delete updateData[info]);
+
+      // Se não for admin, não pode alterar o role
+      if (!isAdmin && updateData.role) {
+        delete updateData.role;
+      }
+
+      // Atualização do usuário
+      const updatedUser = await User.findByIdAndUpdate(targetId, updateData, {
+        new: true, // Retorna o documento atualizado
+        runValidators: true, // Validações do modelo
+      });
+
+      // Verifica se o usuário foi atualizado
+      if (!updatedUser) {
+        const error: CustomError = new Error("Failed to update user");
+        error.status = 500;
+        throw error;
+      }
+
+      return updatedUser;
+    } catch (error) {}
   }
 }

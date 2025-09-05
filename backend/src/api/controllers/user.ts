@@ -61,4 +61,15 @@ export class UserController {
       next(error);
     }
   }
+
+  // PUT /users/:id
+  static async updateUser(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const id = req.params.id;
+    } catch (error: any) {}
+  }
 }
