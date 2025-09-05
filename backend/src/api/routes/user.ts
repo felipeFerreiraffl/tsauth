@@ -19,4 +19,16 @@ userRouter.get("/me", auth, UserController.getCurrentUser);
 // Apenas administrador ou próprio usuário
 userRouter.get("/:id", auth, requireOwnerOrAdmin, UserController.getUserById);
 
+// PUT /api/users/:id
+// Apenas administrador ou próprio usuário
+userRouter.put("/:id", auth, requireOwnerOrAdmin, UserController.updateUser);
+
+// DELETE /api/users/:id
+// Apenas administrador ou próprio usuário
+userRouter.put("/:id", auth, requireOwnerOrAdmin, UserController.deleteUser);
+
+// DELETE /api/users
+// Apenas administrador
+userRouter.put("/:id", auth, requireAdmin, UserController.deleteAllUsers);
+
 export default userRouter;

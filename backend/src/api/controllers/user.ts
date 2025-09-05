@@ -49,13 +49,6 @@ export class UserController {
       const role = req.user?.role;
       const user = await UserService.getUserById(id, userId, role);
 
-      console.log("Usuário: ", {
-        id,
-        userId,
-        role,
-        reqUser: req.user,
-      });
-
       setSuccessStatus(200, res).json({ user });
     } catch (error) {
       next(error);
@@ -70,6 +63,56 @@ export class UserController {
   ): Promise<void> {
     try {
       const id = req.params.id;
-    } catch (error: any) {}
+      const userData = req.body;
+      const userId = req.user?.userId;
+      const role = req.user?.role;
+
+      const user = await UserService.updateUser(id, userData, userId, role);
+
+      setSuccessStatus(200, res).json({
+        message: "User updated successfully",
+        user,
+      });
+    } catch (error: any) {
+      next(error);
+    }
+  }
+
+  // DELETE /users/:id
+  static async deleteUser(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const id = req.params.id;
+      const userId = req.user?.userId;
+      const role = req.user?.role;
+
+      await UserService.deleteUser(id, userId, role);
+
+      setSuccessStatus(200, res).json({ message: "User deleted successfully" });
+    } catch (error: any) {
+      next(error);
+    }
+  }
+
+  // DELETE /users
+  static async deleteAllUsers(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const role = req.user?.role;
+
+      await UserService.deleteAllUsers(role);
+
+      setSuccessStatus(200, res).json({
+        message: "All users deleted succesfully",
+      });
+    } catch (error: any) {
+      next(error);
+    }
   }
 }

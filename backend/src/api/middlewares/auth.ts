@@ -54,8 +54,6 @@ export default function auth(
     const decoded = pkg.verify(token, jwt.secret) as CustomJwtPayload;
     req.user = decoded;
 
-    console.log(req.user);
-
     next(); // Próximo middleware
   } catch (error: any) {
     // Mapeação do erro do JWT

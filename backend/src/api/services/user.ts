@@ -134,6 +134,128 @@ export class UserService {
       }
 
       return updatedUser;
-    } catch (error) {}
+    } catch (error: any) {
+      // Erro de conversão de dados
+      if (error.name === "CastError") {
+        const customError: CustomError = new Error(
+          `Invalid user ID format: ${error.message}`
+        );
+        customError.status = 400;
+        throw customError;
+      }
+
+      // Erro de validação de dados
+      if (error.name === "ValidationError") {
+        const customError: CustomError = new Error(
+          `Validation failed: ${error.message}`
+        );
+        customError.status = 400;
+        throw customError;
+      }
+
+      // Erro de chave duplicada
+      if (error.name === 11000) {
+        const customError: CustomError = new Error("Email already exists");
+        customError.status = 409;
+        throw customError;
+      }
+
+      // Erro do servidor MongoDB
+      if (error.name === "MongoError" || error.name === "MongooseError") {
+        const customError: CustomError = new Error("Mongo database error");
+        customError.status = 500;
+        throw customError;
+      }
+
+      throw error;
+    }
+  }
+
+  // Deletar todos os usuários
+  static async deleteUser(
+    userId: string | undefined,
+    requestUserId: string | undefined,
+    requestUserRole: string | undefined
+  ): Promise<void> {
+    try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        const error: CustomError = new Error("User not found");
+        error.status = 404;
+        throw error;
+      }
+
+      const userIdString = user._id.toString();
+      const requestUserIdString = requestUserId?.toString();
+
+      // Validação do usuário do ID ou admin
+      const isOwner = userIdString === requestUserIdString;
+      const isAdmin = requestUserRole === "admin";
+
+      if (!isOwner && !isAdmin) {
+        const error: CustomError = new Error("Access denied");
+        error.status = 403;
+        throw error;
+      }
+
+      const deletedUser = await User.findByIdAndDelete(userId);
+
+      if (!deletedUser) {
+        const error: CustomError = new Error("Failed to delete user");
+        error.status = 500;
+        throw error;
+      }
+    } catch (error: any) {
+      // Erro de conversão de dados
+      if (error.name === "CastError") {
+        const customError: CustomError = new Error(
+          `Invalid user ID format: ${error.message}`
+        );
+        customError.status = 400;
+        throw customError;
+      }
+
+      // Erro do servidor MongoDB
+      if (error.name === "MongoError" || error.name === "MongooseError") {
+        const customError: CustomError = new Error("Mongo database error");
+        customError.status = 500;
+        throw customError;
+      }
+
+      throw error;
+    }
+  }
+
+  // Deletar todos os usuários (apenas admin)
+  static async deleteAllUsers(
+    requestUserRole: string | undefined
+  ): Promise<void> {
+    try {
+      const isAdmin = requestUserRole === "admin";
+
+      if (!isAdmin) {
+        const error: CustomError = new Error("Access denied");
+        error.status = 403;
+        throw error;
+      }
+
+      const deleteAll = User.deleteMany({});
+
+      if (!deleteAll) {
+        const error: CustomError = new Error("Failed to delete all users");
+        error.status = 500;
+        throw error;
+      }
+    } catch (error: any) {
+      // Erro do servidor MongoDB
+      if (error.name === "MongoError" || error.name === "MongooseError") {
+        const customError: CustomError = new Error("Mongo database error");
+        customError.status = 500;
+        throw customError;
+      }
+
+      throw error;
+    }
   }
 }
