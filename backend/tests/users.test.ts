@@ -254,6 +254,7 @@ describe("User Routes", () => {
         .expect(403);
 
       expect(response.body).toHaveProperty("error", true);
+      expect(response.body).toHaveProperty("status", 403);
     });
 
     // Retorna erro ao não enviar nenhum dado para atualizar
@@ -302,6 +303,7 @@ describe("User Routes", () => {
         .expect(404);
 
       expect(response.body).toHaveProperty("error", true);
+      expect(response.body).toHaveProperty("status", 404);
     });
 
     // Não permite um usuário alterar seu próprio role
@@ -325,6 +327,7 @@ describe("User Routes", () => {
   // Teste de exclusão de um usuário
   describe("DELETE /api/users/:id", () => {
     it("should delete user as its owner", async () => {
+      // Deleta um usuário e verifica se foi excluído
       const response = await request(app)
         .delete(`/api/users/${userId}`)
         .set("Authorization", `Bearer ${authToken}`)
@@ -342,6 +345,78 @@ describe("User Routes", () => {
         .expect(404);
 
       expect(verifyResponse.body).toHaveProperty("error", true);
+    });
+
+    // Retorna erro para usuários não encontrados
+    it("should allow admin to delete users", async () => {
+      const adminResponse = await request(app)
+        .post("/api/auth/register")
+        .send(adminUser);
+      const adminToken = adminResponse.body.token;
+
+      const response = await request(app)
+        .delete(`/api/users/${userId}`)
+        .set("Authorization", `Bearer ${adminToken}`)
+        .expect(200);
+
+      expect(response.body).toHaveProperty(
+        "message",
+        "User deleted successfully"
+      );
+    });
+
+    // Retorna um erro ao outro usuário tentar deletar outro usuário sem ser admin
+    it("should return a forbidden when deleting other user without admin role", async () => {
+      const otherUserResponse = await request(app)
+        .post("/api/auth/register")
+        .send({
+          username: "normal user",
+          email: "normal@email.com",
+          password: "123456",
+        });
+
+      const otherUser = otherUserResponse.body.user;
+      expect(otherUser).toBeDefined();
+      const otherUserId = otherUser._id;
+
+      const response = await request(app)
+        .delete(`/api/users/${otherUserId}`)
+        .set("Authorization", `Bearer ${authToken}`)
+        .expect(403);
+
+      expect(response.body).toHaveProperty("error", true);
+      expect(response.body).toHaveProperty("status", 403);
+    });
+
+    // Retorna um erro ao tentar deletar um usuário que não existe no banco
+    it("should return an error for non-existent user", async () => {
+      const adminResponse = await request(app)
+        .post("/api/auth/register")
+        .send(adminUser);
+      const adminToken = adminResponse.body.token;
+
+      const nonExistentId = "507f1f77bcf86cd799439011";
+
+      const response = await request(app)
+        .delete(`/api/users/${nonExistentId}`)
+        .set("Authorization", `Bearer ${adminToken}`)
+        .expect(404);
+
+      expect(response.body).toHaveProperty("error", true);
+      expect(response.body).toHaveProperty("status", 404);
+    });
+
+    // Retorna um erro ao tentar deletar usuário com ID inválido
+    it("should return an error for invalid user ID", async () => {
+      const invalidId = "invalidId";
+
+      const response = await request(app)
+        .delete(`/api/users/${invalidId}`)
+        .set("Authorization", `Bearer ${authToken}`)
+        .expect(403);
+
+      expect(response.body).toHaveProperty("error", true);
+      expect(response.body).toHaveProperty("status", 403);
     });
   });
 

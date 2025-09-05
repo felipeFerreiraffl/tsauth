@@ -240,7 +240,7 @@ export class UserService {
         throw error;
       }
 
-      const deleteAll = User.deleteMany({});
+      const deleteAll = await User.deleteMany({});
 
       if (!deleteAll) {
         const error: CustomError = new Error("Failed to delete all users");
