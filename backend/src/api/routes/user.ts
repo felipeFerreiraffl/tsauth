@@ -29,6 +29,6 @@ userRouter.delete("/:id", auth, requireOwnerOrAdmin, UserController.deleteUser);
 
 // DELETE /api/users
 // Apenas administrador
-userRouter.delete("/:id", auth, requireAdmin, UserController.deleteAllUsers);
+userRouter.delete("/", auth, requireAdmin, UserController.deleteAllUsers);
 
 export default userRouter;

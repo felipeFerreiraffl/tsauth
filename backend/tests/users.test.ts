@@ -151,7 +151,7 @@ describe("User Routes", () => {
   // Teste de busca de todos os usuários
   describe("GET /api/users", () => {
     // Retorna erro de tentar acessar rota sem ser admin
-    it("should return a forbidden for non-admins", async () => {
+    it("should return forbidden for non-admin users", async () => {
       const response = await request(app)
         .get(`/api/users`)
         .set("Authorization", `Bearer ${authToken}`)
@@ -417,6 +417,38 @@ describe("User Routes", () => {
 
       expect(response.body).toHaveProperty("error", true);
       expect(response.body).toHaveProperty("status", 403);
+    });
+  });
+
+  describe("DELETE /api/users", () => {
+    // Retorna erro ao usuário que não é administrador tentar deletar todos os usuários
+    it("should return forbidden non-admin users", async () => {
+      const response = await request(app)
+        .delete("/api/users")
+        .set("Authorization", `Bearer ${authToken}`)
+        .expect(403);
+
+      expect(response.body).toHaveProperty("error", true);
+      expect(response.body).toHaveProperty("status", 403);
+    });
+
+    // Autoriza o administrador de deletar todos os usuários
+    it("should allow admin to delete all users", async () => {
+      const adminResponse = await request(app)
+        .post("/api/auth/register")
+        .send(adminUser);
+
+      const adminToken = adminResponse.body.token;
+
+      const response = await request(app)
+        .delete("/api/users")
+        .set("Authorization", `Bearer ${adminToken}`)
+        .expect(200);
+
+      expect(response.body).toHaveProperty(
+        "message",
+        "All users deleted succesfully"
+      );
     });
   });
 
