@@ -46,3 +46,7 @@
   --radius-32: 32px;
   --radius-15: 15px;
 }
+
+body {
+  background-color: var(--color-neutral-white);
+}
