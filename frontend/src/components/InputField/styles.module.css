@@ -17,6 +17,10 @@
   padding-bottom: 8px;
 }
 
+.inputContainer:focus-within {
+  border-bottom-color: var(--color-primary-dark);
+}
+
 .inputContainer span {
   display: flex;
   align-items: center;
