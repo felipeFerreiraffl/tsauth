@@ -1,3 +1,5 @@
+import InputField from "../../components/InputField";
+import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
 
@@ -20,6 +22,24 @@ export default function Home() {
               </span>
             </p>
           </div>
+        </div>
+
+        <div className="inputFields">
+          <InputField
+            id="Email"
+            icon={icons.email}
+            inputType="email"
+            placeholder="Email"
+            label="Email"
+          />
+          <InputField
+            id="Password"
+            icon={icons.padlock}
+            inputType="password"
+            placeholder="******"
+            label="Password"
+            showEye={icons.invisible}
+          />
         </div>
       </form>
     </div>
