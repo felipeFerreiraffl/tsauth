@@ -3,6 +3,9 @@ import InputField from "../../components/InputField";
 import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
+import IcnFacebook from "../../assets/svgs/icons/Facebook.svg?react";
+import IcnGoogle from "../../assets/svgs/icons/google.svg?react";
+import IcnApple from "../../assets/svgs/icons/apple.svg?react";
 
 export default function Login() {
   return (
@@ -52,10 +55,20 @@ export default function Login() {
         </div>
 
         <Button
-          label="Botao"
+          type="submit"
+          label="Login"
           color="var(--color-primary-main)"
           onClick={() => ""}
         />
+
+        <div className={styles.continueContainer}>
+          <p>or continue with</p>
+          <div className={styles.iconsContainer}>
+            <IcnFacebook />
+            <IcnApple />
+            <IcnGoogle />
+          </div>
+        </div>
       </form>
     </div>
   );

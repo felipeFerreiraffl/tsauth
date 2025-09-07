@@ -80,3 +80,33 @@ form .titleContainer .paragraphs span a {
   font: var(--font-body-small);
   color: var(--color-neutral-darkgrey);
 }
+
+.continueContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 38px;
+  gap: 31px;
+}
+
+.continueContainer p {
+  font: var(--font-body-16-med);
+  color: var(--color-neutral-grey);
+}
+
+.continueContainer .iconsContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.continueContainer .iconsContainer * {
+  cursor: pointer;
+  width: 42px;
+  aspect-ratio: 1 / 1;
+  transition: 0.3s ease-in-out;
+}
+
+.continueContainer .iconsContainer *:hover {
+  transform: scale(1.05);
+}
