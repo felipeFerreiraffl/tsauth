@@ -1,3 +1,4 @@
+import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 import icons from "../../utils/icons";
 import images from "../../utils/images";
@@ -49,6 +50,12 @@ export default function Login() {
           </div>
           <p>Forgot password ?</p>
         </div>
+
+        <Button
+          label="Botao"
+          color="var(--color-primary-main)"
+          onClick={() => ""}
+        />
       </form>
     </div>
   );
