@@ -29,6 +29,11 @@ form {
   width: 30%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 576px) {
+    margin-top: 102px;
+    width: 85vw;
+  }
 }
 
 form .titleContainer {

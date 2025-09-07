@@ -9,6 +9,10 @@
   border-radius: var(--radius-15);
   background-color: var(--color-primary-dark);
   gap: 84px;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
 }
 
 .phone {
