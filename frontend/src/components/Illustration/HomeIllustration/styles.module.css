@@ -2,6 +2,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  max-width: 70%;
+  height: 98%;
   padding: 0 94px;
   border-radius: var(--radius-15);
   background-color: var(--color-primary-dark);
@@ -36,7 +39,7 @@
 }
 
 .continer img {
-  width: 521px;
+  width: 80%;
   aspect-ratio: 1 / 1;
 }
 
