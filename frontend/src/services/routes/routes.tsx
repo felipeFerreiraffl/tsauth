@@ -1,14 +1,14 @@
 /* ---------- Rotas ---------- */
 
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "../../pages/Home";
+import Login from "../../pages/Login";
 
 export default function AppRoutes() {
   const location = useLocation();
 
   return (
     <Routes key={location.pathname} location={location}>
-      <Route element={<Home />} path="/" />
+      <Route element={<Login />} path="/" />
     </Routes>
   );
 }

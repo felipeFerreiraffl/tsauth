@@ -25,6 +25,7 @@
 }
 
 form {
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
@@ -48,4 +49,34 @@ form .titleContainer .paragraphs {
 form .titleContainer .paragraphs span a {
   font-weight: 600;
   color: var(--color-primary-main);
+}
+
+.inputFieldsContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 52px;
+  gap: 49px;
+}
+
+.inputUtilsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 17px;
+}
+
+.inputUtilsContainer .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inputUtilsContainer .checkbox label {
+  font: var(--font-body-small);
+  color: var(--color-neutral-black);
+}
+
+.inputUtilsContainer > p {
+  font: var(--font-body-small);
+  color: var(--color-neutral-darkgrey);
 }

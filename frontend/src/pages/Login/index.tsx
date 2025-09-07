@@ -3,7 +3,7 @@ import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
 
-export default function Home() {
+export default function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -24,22 +24,30 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="inputFields">
+        <div className={styles.inputFieldsContainer}>
           <InputField
-            id="Email"
+            id="email"
             icon={icons.email}
             inputType="email"
-            placeholder="Email"
+            placeholder="Enter your email address"
             label="Email"
           />
           <InputField
-            id="Password"
+            id="password"
             icon={icons.padlock}
             inputType="password"
-            placeholder="******"
+            placeholder="Enter your password"
             label="Password"
             showEye={icons.invisible}
           />
+        </div>
+
+        <div className={styles.inputUtilsContainer}>
+          <div className={styles.checkbox}>
+            <input id="remember" type="checkbox" />
+            <label id="remember">Remember me</label>
+          </div>
+          <p>Forgot password ?</p>
         </div>
       </form>
     </div>
