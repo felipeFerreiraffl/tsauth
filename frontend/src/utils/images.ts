@@ -1,11 +1,11 @@
 /* ---------- Imagens ---------- */
 
-import dev from "../assets/imgs/dev-illustration.jpg";
-import home from "../assets/imgs/home-illustration.jpg";
+import dev from "../assets/imgs/programmer-illustration.png";
+import home from "../assets/imgs/home-illustration.png";
 import logo from "../assets/logos/logo.svg";
 
 const images = {
-  dev: dev,
+  programmer: dev,
   home: home,
   logo: logo,
 };

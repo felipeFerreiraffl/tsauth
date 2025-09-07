@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import IcnFacebook from "../../assets/svgs/icons/Facebook.svg?react";
 import IcnGoogle from "../../assets/svgs/icons/google.svg?react";
 import IcnApple from "../../assets/svgs/icons/apple.svg?react";
+import HomeIllustration from "../../components/Illustration/HomeIllustration";
 
 export default function Login() {
   return (
@@ -70,6 +71,8 @@ export default function Login() {
           </div>
         </div>
       </form>
+
+      <HomeIllustration />
     </div>
   );
 }

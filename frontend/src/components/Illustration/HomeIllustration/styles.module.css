@@ -1,0 +1,56 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 94px;
+  border-radius: var(--radius-15);
+  background-color: var(--color-primary-dark);
+  gap: 84px;
+}
+
+.phone {
+  position: absolute;
+  top: 24px;
+  right: 26px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.phone span {
+  display: flex;
+  width: 14px;
+  aspect-ratio: 1 / 1;
+}
+
+.phone span * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  fill: var(--color-neutral-white);
+}
+
+.phone p {
+  font: var(--font-body-15);
+  color: var(--color-neutral-white);
+}
+
+.continer img {
+  width: 521px;
+  aspect-ratio: 1 / 1;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--color-neutral-white);
+}
+
+.textContainer h2 {
+  font: var(--font-title-40);
+}
+
+.textContainer p {
+  font: var(--font-body-20);
+}
