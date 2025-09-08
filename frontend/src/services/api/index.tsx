@@ -1,0 +1,6 @@
+/* ---------- API ---------- */
+
+
+export const getUserById = (id: string) => {
+    
+};
