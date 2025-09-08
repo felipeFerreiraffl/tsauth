@@ -7,6 +7,7 @@ import IcnFacebook from "../../assets/svgs/icons/Facebook.svg?react";
 import IcnGoogle from "../../assets/svgs/icons/google.svg?react";
 import IcnApple from "../../assets/svgs/icons/apple.svg?react";
 import HomeIllustration from "../../components/Illustration/HomeIllustration";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -23,7 +24,7 @@ export default function Login() {
             <p>
               You can{" "}
               <span>
-                <a href="">Register here!</a>
+                <Link to={"/register"}>Register here!</Link>
               </span>
             </p>
           </div>
@@ -59,6 +60,7 @@ export default function Login() {
           type="submit"
           label="Login"
           color="var(--color-primary-main)"
+          marginTop={60}
           onClick={() => ""}
         />
 
@@ -72,7 +74,7 @@ export default function Login() {
         </div>
       </form>
 
-      <HomeIllustration />
+      <HomeIllustration message="Sign in to name" />
     </div>
   );
 }

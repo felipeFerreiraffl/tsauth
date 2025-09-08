@@ -6,6 +6,7 @@ type ButtonProps = {
   color: string;
   border?: string;
   type?: "submit";
+  marginTop?: number;
   onClick: () => void;
 };
 
@@ -23,6 +24,7 @@ export default function Button(
             ? "var(--color-primary-main)"
             : "var(--color-neutral-white)",
         border: props.border,
+        marginTop: props.marginTop,
       }}
       onClick={props.onClick}
     >

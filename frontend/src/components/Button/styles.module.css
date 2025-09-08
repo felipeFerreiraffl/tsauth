@@ -1,7 +1,6 @@
 .btn {
   cursor: pointer;
   width: 100%;
-  margin-top: 60px;
   font: var(--font-body-btn);
   padding: 14px 0;
   border-radius: var(--radius-32);
