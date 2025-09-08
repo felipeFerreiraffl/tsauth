@@ -6,12 +6,21 @@
   padding: 40px;
   background-color: var(--color-primary-dark);
   border-radius: var(--radius-15);
+
+  @media (max-width: 576px) {
+    padding: 20px;
+    margin-bottom: 100px;
+  }
 }
 
-.container img {
+.container > img {
   max-width: 428px;
   width: 76%;
   aspect-ratio: 1 / 1;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
 }
 
 .content {
@@ -34,6 +43,10 @@
 
 .content .textContainer h2 {
   font: var(--font-title-40);
+
+  @media (max-width: 576px) {
+    font: var(--font-title-28);
+  }
 }
 
 .content .iconsContainer {
