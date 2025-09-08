@@ -1,4 +1,5 @@
 import Button from "../../components/Button";
+import DevIllustration from "../../components/Illustration/DevIllustration";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
 
@@ -16,7 +17,7 @@ export default function User() {
         </div>
         <div className={styles.informationsContainer}>
           <h2>Your informations</h2>
-          <div className={styles}></div>
+          <div className={styles.fieldsContainer}></div>
         </div>
 
         <div className={styles.btnContainer}>
@@ -38,6 +39,8 @@ export default function User() {
           />
         </div>
       </div>
+
+      <DevIllustration />
     </div>
   );
 }
