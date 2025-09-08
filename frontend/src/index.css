@@ -1,0 +1,56 @@
+/* ---------- Classes e variáveis globais CSS ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  background: none;
+  list-style: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+:root {
+  /* ----- Fontes ----- */
+  /* Títulos */
+  --font-title-40: 600 40px "Poppins", sans-serif;
+  --font-title-30: 500 30px "Poppins", sans-serif;
+  --font-title-28: 600 28px "Poppins", sans-serif;
+
+  /* Corridos */
+  --font-body-20: 300 20px "Poppins", sans-serif;
+  --font-body-btn: 500 17px "Poppins", sans-serif;
+  --font-body-16-med: 500 16px "Poppins", sans-serif;
+  --font-body-16: 400 16px "Poppins", sans-serif;
+  --font-body-15: 400 15px "Poppins", sans-serif;
+  --font-body-label: 500 13px "Poppins", sans-serif;
+  --font-body-small: 300 12px "Poppins", sans-serif;
+
+  /* ----- Cores ----- */
+  /* Primárias */
+  --color-primary-main: #0c21c1;
+  --color-primary-dark: #000842;
+
+  /* Neutras */
+  --color-neutral-black: #000;
+  --color-neutral-grey: #b5b5b5;
+  --color-neutral-grey-2: #ababab;
+  --color-neutral-grey-3: #999;
+  --color-neutral-darkgrey: #4d4d4d;
+  --color-neutral-white: #fff;
+
+  /* Auxiliares */
+  --color-auxiliary-red: #C10C0F;
+
+  /* ----- Sombras ----- */
+  --shadow-btn: 0 4px 26px rgba(0, 0, 0, 0.25);
+
+  /* ----- Arredondamento de bordas ----- */
+  --radius-32: 32px;
+  --radius-15: 15px;
+}
+
+body {
+  background-color: var(--color-neutral-white);
+  min-height: 100vh;
+}

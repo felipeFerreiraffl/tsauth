@@ -1,0 +1,122 @@
+.container {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  @media (max-width: 576px) {
+    margin-bottom: 100px;
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 31px;
+  left: 42px;
+  width: 73px;
+  height: auto;
+
+  @media (max-width: 576px) {
+    top: 18px;
+    left: 26px;
+  }
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+form {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 576px) {
+    margin-top: 102px;
+    width: 85vw;
+  }
+}
+
+form .titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+form .titleContainer h1 {
+  font: var(--font-title-30);
+  color: var(--color-neutral-black);
+}
+
+form .titleContainer .paragraphs {
+  font: var(--font-body-16);
+  color: var(--color-neutral-black);
+}
+
+form .titleContainer .paragraphs span a {
+  font-weight: 600;
+  color: var(--color-primary-main);
+}
+
+.inputFieldsContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 52px;
+  gap: 49px;
+}
+
+.inputUtilsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 17px;
+}
+
+.inputUtilsContainer .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inputUtilsContainer .checkbox label {
+  font: var(--font-body-small);
+  color: var(--color-neutral-black);
+}
+
+.inputUtilsContainer > p {
+  font: var(--font-body-small);
+  color: var(--color-neutral-darkgrey);
+}
+
+.continueContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 38px;
+  gap: 31px;
+}
+
+.continueContainer p {
+  font: var(--font-body-16-med);
+  color: var(--color-neutral-grey);
+}
+
+.continueContainer .iconsContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.continueContainer .iconsContainer * {
+  cursor: pointer;
+  width: 42px;
+  aspect-ratio: 1 / 1;
+  transition: 0.3s ease-in-out;
+}
+
+.continueContainer .iconsContainer *:hover {
+  transform: scale(1.05);
+}

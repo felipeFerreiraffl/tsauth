@@ -1,0 +1,13 @@
+.btn {
+  cursor: pointer;
+  width: 100%;
+  font: var(--font-body-btn);
+  padding: 14px 0;
+  border-radius: var(--radius-32);
+  box-shadow: var(--shadow-btn);
+  transition: 0.3s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}

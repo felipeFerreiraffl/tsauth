@@ -1,0 +1,66 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.labelContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.labelContainer span {
+  display: flex;
+  width: 16px;
+  aspect-ratio: 1 / 1;
+}
+
+.labelContainer span * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  fill: var(--color-neutral-black);
+}
+
+.labelContainer label {
+  font: var(--font-body-label);
+  color: var(--color-neutral-black);
+}
+
+.inputContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--color-neutral-grey-3);
+}
+
+.inputContainer input {
+  width: 100%;
+  font: var(--font-body-15);
+  color: var(--color-neutral-grey-3);
+}
+
+.inputContainer.editable input {
+  color: var(--color-neutral-black);
+}
+
+.inputContainer.editable:focus-within {
+  border-bottom-color: var(--color-primary-dark);
+}
+
+.inputContainer span {
+  display: flex;
+  width: 14px;
+  aspect-ratio: 1 / 1;
+}
+
+.inputContainer span * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  fill: var(--color-neutral-grey-3);
+}
