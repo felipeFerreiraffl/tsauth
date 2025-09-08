@@ -1,4 +1,4 @@
-import { type JSX } from "react";
+import { type HTMLInputTypeAttribute, type JSX } from "react";
 import styles from "./styles.module.css";
 
 type InputFieldProps = {
@@ -6,7 +6,7 @@ type InputFieldProps = {
   label: string;
   icon: JSX.Element;
   placeholder: string;
-  inputType: string;
+  inputType: HTMLInputTypeAttribute;
   showEye?: JSX.Element;
 };
 

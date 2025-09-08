@@ -1,5 +1,7 @@
 import Button from "../../components/Button";
 import DevIllustration from "../../components/Illustration/DevIllustration";
+import InfoField from "../../components/InfoField";
+import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
 
@@ -17,7 +19,30 @@ export default function User() {
         </div>
         <div className={styles.informationsContainer}>
           <h2>Your informations</h2>
-          <div className={styles.fieldsContainer}></div>
+          <div className={styles.fieldsContainer}>
+            <InfoField
+              icon={icons.user}
+              label="Username"
+              id="username"
+              type="text"
+              value="Username"
+            />
+            <InfoField
+              icon={icons.email}
+              label="Email"
+              id="email"
+              type="email"
+              value="Email"
+            />
+            <InfoField
+              icon={icons.padlock}
+              label="Password"
+              id="password"
+              type="password"
+              value="Password"
+              showEye
+            />
+          </div>
         </div>
 
         <div className={styles.btnContainer}>
