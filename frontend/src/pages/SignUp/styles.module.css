@@ -1,9 +1,13 @@
 .container {
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media (max-width: 576px) {
+    margin-bottom: 100px;
+  }
 }
 
 .logo {
