@@ -1,3 +1,4 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import DevIllustration from "../../components/Illustration/DevIllustration";
 import InfoField from "../../components/InfoField";
@@ -9,9 +10,11 @@ import styles from "./styles.module.css";
 export default function User() {
   // Informações da API
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
+    navigate("/");
   };
 
   return (

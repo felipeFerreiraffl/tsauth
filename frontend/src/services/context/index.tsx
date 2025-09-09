@@ -7,11 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import {
-  API_URL,
-  type AuthContextType,
-  type User
-} from "../types";
+import { API_URL, type AuthContextType, type User } from "../types";
 
 // Criação de contexto
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -117,7 +113,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
       return false;
     } catch (error: any) {
-      console.error(`Register failer: ${error}`);
+      console.error(`Register failed: ${error}`);
       return false;
     }
   };
