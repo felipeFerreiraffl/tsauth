@@ -9,6 +9,8 @@ import authRouter from "./api/routes/auth";
 const app = express();
 app.use(express.json());
 
+// 
+
 // Rotas de autenticação
 app.use("/api/auth", authRouter);
 
