@@ -10,8 +10,7 @@ import {
 import {
   API_URL,
   type AuthContextType,
-  type LoginRequest,
-  type User,
+  type User
 } from "../types";
 
 // Criação de contexto

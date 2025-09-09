@@ -1,19 +1,91 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Button from "../../components/Button";
 import HomeIllustration from "../../components/Illustration/HomeIllustration";
 import InputField from "../../components/InputField";
 import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
+import { useState } from "react";
+import { useAuth } from "../../services/context";
 
 export default function SignUp() {
+  // Estado do form para enviar dados
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [isLoading, setIsLoading] = useState<boolean>(false); // Estado do carregamento
+  const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não
+
+  // Props da autenticação
+  const { user, register } = useAuth();
+
+  // Se estiver logado, redireciona até a página de usuário
+  if (user) {
+    return <Navigate to={"/user"} replace />;
+  }
+
+  // Aplica as mudanças do valor input
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Confirmar os dados para cadastro
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Valida se as senhas coincidem
+    if (formData.password !== formData.confirmPassword) {
+      alert("As senhas não coincidem");
+      return;
+    }
+
+    // Valida se a senha ter menos que 6 dígitos
+    if (formData.password.length < 6) {
+      alert("Senhas não coincidem");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const success = await register(
+        formData.username,
+        formData.email,
+        formData.password
+      );
+
+      if (!success) {
+        alert("Erro ao criar usuário. Tente denovo.");
+      }
+
+      // O AuthProvider já faz verificação de sucesso = true
+    } catch (err) {
+      alert("Erro interno. Tente novamente.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Mostra a senha
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
         <img src={images.logo} alt="TSAuth logo" />
       </div>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className={styles.titleContainer}>
           <h1>Sign in</h1>
           <div className={styles.paragraphs}>
@@ -34,6 +106,9 @@ export default function SignUp() {
             inputType="email"
             icon={icons.email}
             placeholder="Enter your email address"
+            value={formData.email}
+            onChange={handleInputChange}
+            disabled={isLoading}
           />
           <InputField
             label="Username"
@@ -41,31 +116,43 @@ export default function SignUp() {
             inputType="text"
             icon={icons.user}
             placeholder="Enter your User name"
+            value={formData.username}
+            onChange={handleInputChange}
+            disabled={isLoading}
           />
           <InputField
             label="Password"
             id="password"
-            inputType="password"
+            inputType={showPassword ? "text" : "password"}
             icon={icons.padlock}
             placeholder="Enter your Password"
             showEye={icons.invisible}
+            value={formData.password}
+            onChange={handleInputChange}
+            onClick={togglePasswordVisibility}
+            minLength={6}
+            disabled={isLoading}
           />
           <InputField
             label="Confrim Password"
             showEye={icons.invisible}
-            id="password"
-            inputType="password"
+            id="confirmPassword"
+            inputType={showPassword ? "text" : "password"}
             icon={icons.padlock}
             placeholder="Confirm your Password"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            onClick={togglePasswordVisibility}
+            disabled={isLoading}
           />
         </div>
 
         <Button
           color="var(--color-primary-main)"
-          label="Register"
-          onClick={() => ""}
+          label={isLoading ? "Creating user..." : "Register"}
           type="submit"
           marginTop={58}
+          disabled={isLoading}
         />
       </form>
 

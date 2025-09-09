@@ -7,7 +7,8 @@ type ButtonProps = {
   border?: string;
   type?: "submit";
   marginTop?: number;
-  onClick: () => void;
+  onClick?: () => void;
+  disabled?: boolean;
 };
 
 export default function Button(
@@ -27,6 +28,7 @@ export default function Button(
         marginTop: props.marginTop,
       }}
       onClick={props.onClick}
+      disabled={props.disabled}
     >
       {props.label}
     </button>

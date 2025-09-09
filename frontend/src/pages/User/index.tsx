@@ -1,11 +1,19 @@
 import Button from "../../components/Button";
 import DevIllustration from "../../components/Illustration/DevIllustration";
 import InfoField from "../../components/InfoField";
+import { useAuth } from "../../services/context";
 import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
 
 export default function User() {
+  // Informações da API
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -14,7 +22,7 @@ export default function User() {
 
       <div className={styles.userContent}>
         <div className={styles.titleContainer}>
-          <h1>Welcome, user!</h1>
+          <h1>Welcome, {user?.username}!</h1>
           <p>This is a project developed with TypeScript, Node.js and JWT.</p>
         </div>
         <div className={styles.informationsContainer}>
@@ -25,21 +33,21 @@ export default function User() {
               label="Username"
               id="username"
               type="text"
-              value="Username"
+              value={user?.username}
             />
             <InfoField
               icon={icons.email}
               label="Email"
               id="email"
               type="email"
-              value="Email"
+              value={user?.email}
             />
             <InfoField
               icon={icons.padlock}
               label="Password"
               id="password"
               type="password"
-              value="Password"
+              value={user?.password}
               showEye
             />
           </div>
@@ -55,7 +63,7 @@ export default function User() {
             color="none"
             border="2px solid var(--color-primary-main)"
             label="Sign out"
-            onClick={() => ""}
+            onClick={handleLogout}
           />
           <Button
             color="var(--color-auxiliary-red)"
