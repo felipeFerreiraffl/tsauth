@@ -49,7 +49,7 @@ describe("User Routes", () => {
       expect(response.body.user).toHaveProperty("createdAt");
       expect(response.body.user).toHaveProperty("updatedAt");
 
-      expect(response.body.user).not.toHaveProperty("password");
+      expect(response.body.user).toHaveProperty("password", "******");
     });
 
     // Retorna um erro de token inexistente

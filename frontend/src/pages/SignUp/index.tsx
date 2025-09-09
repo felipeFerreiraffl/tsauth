@@ -1,14 +1,15 @@
-import { Link, Navigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import HomeIllustration from "../../components/Illustration/HomeIllustration";
 import InputField from "../../components/InputField";
+import { useAuth } from "../../services/context";
 import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
-import { useState } from "react";
-import { useAuth } from "../../services/context";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   // Estado do form para enviar dados
   const [formData, setFormData] = useState({
     username: "",
@@ -20,12 +21,12 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não
 
   // Props da autenticação
-  const { user, register } = useAuth();
+  const { register } = useAuth();
 
-  // Se estiver logado, redireciona até a página de usuário
-  if (user) {
-    return <Navigate to={"/user"} replace />;
-  }
+  // // Se estiver logado, redireciona até a página de usuário
+  // if (user) {
+  //   return <Navigate to={"/user"} replace />;
+  // }
 
   // Aplica as mudanças do valor input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +66,8 @@ export default function SignUp() {
       if (!success) {
         alert("Erro ao criar usuário. Tente denovo.");
       }
+
+      navigate("/user");
 
       // O AuthProvider já faz verificação de sucesso = true
     } catch (err) {

@@ -13,7 +13,11 @@ userRouter.get("/", auth, requireAdmin, UserController.getAllUsers);
 
 // GET /api/users/me
 // Qualquer usuário vê os seus dados
-userRouter.get("/me", auth, UserController.getCurrentUser);
+userRouter.get("/me", auth, UserController.getCurrentUserWithPassword);
+
+// GET /api/users/profile
+// Qualquer usuários pode ver os seus dados, porém, sem senha
+userRouter.get("/profile", auth, UserController.getCurrentUser);
 
 // GET /api/users/:id
 // Apenas administrador ou próprio usuário

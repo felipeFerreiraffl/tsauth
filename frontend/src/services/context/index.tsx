@@ -39,7 +39,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const validateToken = async (token: string) => {
     try {
       // Pega a requisição do backend
-      const response = await fetch(`${API_URL}/auth/me`, {
+      const response = await fetch(`${API_URL}/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

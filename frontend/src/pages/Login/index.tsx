@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IcnApple from "../../assets/svgs/icons/apple.svg?react";
 import IcnFacebook from "../../assets/svgs/icons/Facebook.svg?react";
 import IcnGoogle from "../../assets/svgs/icons/google.svg?react";
@@ -12,18 +12,19 @@ import images from "../../utils/images";
 import styles from "./styles.module.css";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>(""); // Estado do email
   const [password, setPassword] = useState<string>(""); // Estado da senha
   const [error, setError] = useState<any>(""); // Estado das mensagens erros
   const [isLoading, setIsLoading] = useState<boolean>(false); // Estado do carregamento
   const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não
 
-  const { user, login } = useAuth();
+  const { login } = useAuth();
 
-  // Navega até a página do usuário caso já esteja autenticado
-  if (user) {
-    return <Navigate to={"/user"} replace />;
-  }
+  // // Navega até a página do usuário caso já esteja autenticado
+  // if (user) {
+  //   return <Navigate to={"/user"} replace />;
+  // }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +38,8 @@ export default function Login() {
         setError("Email ou senha incorretos");
         alert(error);
       }
+
+      navigate("/user");
     } catch (err) {
       setError("Email interno. Tente novamente.");
       alert(error);

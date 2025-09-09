@@ -74,6 +74,36 @@ export class UserService {
     }
   }
 
+  // Busca o usuário com a senha
+  static async getUserByIdWithPassword(
+    userId: string | undefined
+  ): Promise<any> {
+    try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        const error: CustomError = new Error("User not found");
+        error.status = 404;
+        throw error;
+      }
+
+      const userObj = user.toObject();
+      return {
+        ...userObj,
+        password: "*".repeat(6), // Mascara a senha com 6 asteriscos
+      };
+    } catch (error: any) {
+      if (error.name === "CastError") {
+        const customError: CustomError = new Error(
+          `Invalid user ID format: ${error.message}`
+        );
+        customError.status = 400;
+        throw customError;
+      }
+      throw error;
+    }
+  }
+
   // Atualiza um usuário
   static async updateUser(
     targetId: string | undefined,

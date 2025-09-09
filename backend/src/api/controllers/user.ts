@@ -3,6 +3,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { setSuccessStatus } from "../middlewares/statusHandler";
 import { UserService } from "../services/user";
+import { json } from "stream/consumers";
 
 export class UserController {
   // GET /users
@@ -20,7 +21,25 @@ export class UserController {
     }
   }
 
-  // GET /users/me -> apenas o usuário do ID pode ver seus dados
+  // GET /users/me -> apenas o usuário do ID pode ver seus dados com senha
+  static async getCurrentUserWithPassword(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const userId = req.user?.userId;
+      const role = req.user?.role;
+
+      const user = await UserService.getUserByIdWithPassword(userId);
+
+      setSuccessStatus(200, res).json({ user });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // GET /users/profile -> apenas o usuário do ID pode ver seus dados
   static async getCurrentUser(
     req: Request,
     res: Response,
