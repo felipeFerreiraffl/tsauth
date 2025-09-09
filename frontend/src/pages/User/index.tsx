@@ -6,15 +6,78 @@ import { useAuth } from "../../services/context";
 import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
+import React, { useState } from "react";
+import { updateUser } from "../../services/api";
 
 export default function User() {
   // Informações da API
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState({
+    username: user?.username || "",
+    email: user?.email || "",
+    password: user?.password || "",
+  });
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleLogout = () => {
     logout();
     navigate("/");
+  };
+
+  // Ativa o modo de edição
+  const handleEditMode = () => {
+    setEditMode(true);
+  };
+
+  // Detecta mudanças do input
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // Prepara os dados para o envio
+    const updatedData: any = {};
+
+    // Insere os dados atualizados
+    if (formData.username !== user?.username && formData.username.trim()) {
+      updatedData.username = formData.username.trim();
+    }
+
+    if (formData.email !== user?.email && formData.email.trim()) {
+      updatedData.email = formData.email.trim();
+    }
+
+    if (formData.password !== user?.password && formData.password.trim()) {
+      updatedData.password = formData.password.trim();
+    }
+
+    try {
+      const success = await updateUser(user?._id, updatedData);
+
+      if (!success) {
+        alert("Erro ao atualizar os dados");
+        return;
+      }
+
+      alert("Dados atualizados com sucesso");
+      setFormData(success);
+      setEditMode(false);
+    } catch (error) {
+      alert("Erro interno. Tente novamente.");
+    } finally {
+      setIsLoading(true);
+    }
   };
 
   return (
@@ -37,6 +100,8 @@ export default function User() {
               id="username"
               type="text"
               value={user?.username}
+              onChange={handleInputChange}
+              editable={editMode}
             />
             <InfoField
               icon={icons.email}
@@ -44,6 +109,8 @@ export default function User() {
               id="email"
               type="email"
               value={user?.email}
+              onChange={handleInputChange}
+              editable={editMode}
             />
             <InfoField
               icon={icons.padlock}
@@ -51,6 +118,8 @@ export default function User() {
               id="password"
               type="password"
               value={user?.password}
+              onChange={handleInputChange}
+              editable={editMode}
               showEye
             />
           </div>
@@ -59,20 +128,24 @@ export default function User() {
         <div className={styles.btnContainer}>
           <Button
             color="var(--color-primary-main)"
-            label="Change informations"
-            onClick={() => ""}
+            label={editMode ? "Confirm" : "Change informations"}
+            onClick={handleEditMode}
+            disabled={isLoading}
+            type="submit"
           />
           <Button
             color="none"
             border="2px solid var(--color-primary-main)"
-            label="Sign out"
-            onClick={handleLogout}
+            label={editMode ? "Cancel" : "Sign out"}
+            onClick={editMode ? () => setEditMode(false) : handleLogout}
           />
-          <Button
-            color="var(--color-auxiliary-red)"
-            label="Delete account"
-            onClick={() => ""}
-          />
+          {!editMode && (
+            <Button
+              color="var(--color-auxiliary-red)"
+              label="Delete account"
+              // onClick={() => ""}
+            />
+          )}
         </div>
       </div>
 

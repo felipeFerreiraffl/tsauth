@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { MouseEventHandler, ReactElement } from "react";
 import styles from "./styles.module.css";
 
 type ButtonProps = {
@@ -7,7 +7,7 @@ type ButtonProps = {
   border?: string;
   type?: "submit";
   marginTop?: number;
-  onClick?: () => void;
+  onClick?: any;
   disabled?: boolean;
 };
 
