@@ -35,8 +35,6 @@ export default function User() {
     }
   }, [user]);
 
-  console.log(`User: ${JSON.stringify(user)}`);
-
   const handleLogout = () => {
     logout();
     navigate("/");
