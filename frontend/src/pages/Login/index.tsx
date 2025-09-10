@@ -15,7 +15,6 @@ export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>(""); // Estado do email
   const [password, setPassword] = useState<string>(""); // Estado da senha
-  const [error, setError] = useState<any>(""); // Estado das mensagens erros
   const [isLoading, setIsLoading] = useState<boolean>(false); // Estado do carregamento
   const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não
 
@@ -28,21 +27,18 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
     setIsLoading(true);
 
     try {
       const success = await login(email, password);
 
       if (!success) {
-        setError("Email or password are incorrect");
-        alert(error);
+        alert("Email or password are incorrect");
       }
 
       navigate("/user");
     } catch (err) {
-      setError("Internal error. Try again later.");
-      alert(error);
+      alert("Internal error. Try again later.");
     } finally {
       setIsLoading(false);
     }
