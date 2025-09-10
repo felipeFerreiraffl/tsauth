@@ -17,7 +17,7 @@ export default function Login() {
   const [password, setPassword] = useState<string>(""); // Estado da senha
   const [error, setError] = useState<any>(""); // Estado das mensagens erros
   const [isLoading, setIsLoading] = useState<boolean>(false); // Estado do carregamento
-  const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não 
+  const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não
 
   const { login } = useAuth();
 
@@ -35,13 +35,13 @@ export default function Login() {
       const success = await login(email, password);
 
       if (!success) {
-        setError("Email ou senha incorretos");
+        setError("Email or password are incorrect");
         alert(error);
       }
 
       navigate("/user");
     } catch (err) {
-      setError("Email interno. Tente novamente.");
+      setError("Internal error. Try again later.");
       alert(error);
     } finally {
       setIsLoading(false);

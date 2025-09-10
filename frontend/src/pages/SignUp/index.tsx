@@ -44,13 +44,13 @@ export default function SignUp() {
 
     // Valida se as senhas coincidem
     if (formData.password !== formData.confirmPassword) {
-      alert("As senhas não coincidem");
+      alert("Passwords don't match");
       return;
     }
 
     // Valida se a senha ter menos que 6 dígitos
     if (formData.password.length < 6) {
-      alert("Senhas não coincidem");
+      alert("Password can't have less than 6 characters");
       return;
     }
 
@@ -64,14 +64,14 @@ export default function SignUp() {
       );
 
       if (!success) {
-        alert("Erro ao criar usuário. Tente denovo.");
+        alert("Create user failed. Try again later.");
       }
 
       navigate("/user");
 
       // O AuthProvider já faz verificação de sucesso = true
     } catch (err) {
-      alert("Erro interno. Tente novamente.");
+      alert("Internal error. Try again later.");
     } finally {
       setIsLoading(false);
     }

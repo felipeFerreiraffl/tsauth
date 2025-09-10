@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-around;
 
-  @media (max-width: 576px) {
+  @media (max-width: 992px) {
     margin-bottom: 100px;
   }
 }
@@ -17,7 +17,7 @@
   width: 73px;
   height: auto;
 
-  @media (max-width: 576px) {
+  @media (max-width: 992px) {
     top: 18px;
     left: 26px;
   }
@@ -34,7 +34,7 @@ form {
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 576px) {
+  @media (max-width: 992px) {
     margin-top: 102px;
     width: 85vw;
   }

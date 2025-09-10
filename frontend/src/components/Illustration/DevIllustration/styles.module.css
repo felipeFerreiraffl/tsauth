@@ -7,7 +7,7 @@
   background-color: var(--color-primary-dark);
   border-radius: var(--radius-15);
 
-  @media (max-width: 576px) {
+  @media (max-width: 992px) {
     padding: 20px;
     margin-bottom: 100px;
   }
@@ -18,7 +18,7 @@
   width: 76%;
   aspect-ratio: 1 / 1;
 
-  @media (max-width: 576px) {
+  @media (max-width: 992px) {
     display: none;
   }
 }
@@ -44,7 +44,7 @@
 .content .textContainer h2 {
   font: var(--font-title-40);
 
-  @media (max-width: 576px) {
+  @media (max-width: 992px) {
     font: var(--font-title-28);
   }
 }

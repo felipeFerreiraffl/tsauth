@@ -4,13 +4,12 @@
   flex-direction: column;
   justify-content: center;
   max-width: 70%;
-  height: 98%;
-  padding: 0 94px;
+  padding: 40px 94px;
   border-radius: var(--radius-15);
   background-color: var(--color-primary-dark);
   gap: 84px;
 
-  @media (max-width: 576px) {
+  @media (max-width: 992px) {
     display: none;
   }
 }

@@ -109,6 +109,14 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         setToken(data.token);
         localStorage.setItem("token", data.token);
         return true;
+      } else {
+        const errorData = await response.json().catch(() => {});
+
+        if (response.status === 409) {
+          if (errorData.message && errorData.message.includes("email")) {
+            alert("This email already exists");
+          }
+        }
       }
 
       return false;
