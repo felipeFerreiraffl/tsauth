@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import DevIllustration from "../../components/Illustration/DevIllustration";
 
 import InfoField from "../../components/InfoField";
-import { updateUser } from "../../services/api";
+import { deleteUser, updateUser } from "../../services/api";
 import { useAuth } from "../../services/context";
 import icons from "../../utils/icons";
 import images from "../../utils/images";
@@ -77,13 +77,9 @@ export default function User() {
       updatedData.password = formData.password;
     }
 
-    console.log(
-      `Objeto de dados para atualizar: ${JSON.stringify(updatedData)}`
-    );
-
     // Verifica se os dados foram atualizados
     if (Object.keys(updatedData).length === 0) {
-      alert("Nenhum dado foi modificado");
+      alert("No data were updated");
       setIsLoading(false);
       setEditMode(false);
       return;
@@ -91,7 +87,7 @@ export default function User() {
 
     try {
       if (!token) {
-        alert("Token não identificado");
+        alert("Token ot identified");
         return;
       }
 
@@ -102,14 +98,12 @@ export default function User() {
         return;
       }
 
-      console.log(`Usuário atualizado: ${updatedData}`);
-
       // Atualiza o estado do context de usuário atualizado
       if (success.user) {
         updateUserData(success.user);
       }
 
-      alert("Dados atualizados com sucesso");
+      alert("Update user successfully");
       setFormData((prev) => ({
         ...prev,
         password: "",
@@ -117,8 +111,8 @@ export default function User() {
 
       setEditMode(false);
     } catch (error) {
-      console.error(`Erro ao atualizar dados: ${error}`);
-      alert("Erro interno. Tente novamente.");
+      console.error(`Updating user failed: ${error}`);
+      alert("Internal error. Try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -133,6 +127,26 @@ export default function User() {
     });
 
     setEditMode(false);
+  };
+
+  const handleDelete = async () => {
+    setIsLoading(true);
+    const canDelete = window.confirm("Do you really want to delete your user?");
+
+    if (canDelete) {
+      try {
+        const success = await deleteUser(user?._id, token);
+
+        alert("Deleted user successfully");
+        return success;
+      } catch (error) {
+        console.error(`Deleting user failed: ${error}`);
+        alert("Internal error. Try again later.");
+      } finally {
+        setIsLoading(false);
+        navigate("/");
+      }
+    }
   };
 
   // Mostra senha
@@ -207,7 +221,7 @@ export default function User() {
             <Button
               color="var(--color-auxiliary-red)"
               label="Delete account"
-              // onClick={() => ""}
+              onClick={handleDelete}
             />
           )}
         </div>
