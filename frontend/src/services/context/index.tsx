@@ -125,6 +125,11 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     localStorage.removeItem("token");
   };
 
+  // Atualiza os dados do usuário
+  const updateUserData = (updatedUser: User) => {
+    setUser(updatedUser);
+  };
+
   const value = {
     user,
     token,
@@ -132,6 +137,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     register,
     logout,
     loading,
+    updateUserData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

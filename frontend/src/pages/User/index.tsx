@@ -1,26 +1,40 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import DevIllustration from "../../components/Illustration/DevIllustration";
+
 import InfoField from "../../components/InfoField";
+import { updateUser } from "../../services/api";
 import { useAuth } from "../../services/context";
 import icons from "../../utils/icons";
 import images from "../../utils/images";
 import styles from "./styles.module.css";
-import React, { useState } from "react";
-import { updateUser } from "../../services/api";
 
 export default function User() {
   // Informações da API
-  const { user, logout } = useAuth();
+  const { user, logout, token, updateUserData } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: user?.username || "",
     email: user?.email || "",
-    password: user?.password || "",
+    password: "",
   });
   const [editMode, setEditMode] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Sempre atualiza os dados que precisar
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        username: user?.username || "",
+        email: user?.email || "",
+        password: "",
+      });
+    }
+  }, [user]);
+
+  console.log(`User: ${JSON.stringify(user)}`);
 
   const handleLogout = () => {
     logout();
@@ -51,33 +65,73 @@ export default function User() {
 
     // Insere os dados atualizados
     if (formData.username !== user?.username && formData.username.trim()) {
-      updatedData.username = formData.username.trim();
+      updatedData.username = formData.username;
     }
 
     if (formData.email !== user?.email && formData.email.trim()) {
-      updatedData.email = formData.email.trim();
+      updatedData.email = formData.email;
     }
 
-    if (formData.password !== user?.password && formData.password.trim()) {
-      updatedData.password = formData.password.trim();
+    if (formData.password.trim()) {
+      updatedData.password = formData.password;
+    }
+
+    console.log(
+      `Objeto de dados para atualizar: ${JSON.stringify(updatedData)}`
+    );
+
+    // Verifica se os dados foram atualizados
+    if (Object.keys(updatedData).length === 0) {
+      alert("Nenhum dado foi modificado");
+      setIsLoading(false);
+      setEditMode(false);
+      return;
     }
 
     try {
-      const success = await updateUser(user?._id, updatedData);
+      if (!token) {
+        alert("Token não identificado");
+        return;
+      }
+
+      const success = await updateUser(user?._id, updatedData, token);
 
       if (!success) {
         alert("Erro ao atualizar os dados");
         return;
       }
 
+      console.log(`Usuário atualizado: ${updatedData}`);
+
+      // Atualiza o estado do context de usuário atualizado
+      if (success.user) {
+        updateUserData(success.user);
+      }
+
       alert("Dados atualizados com sucesso");
-      setFormData(success);
+      setFormData((prev) => ({
+        ...prev,
+        password: "",
+      }));
+
       setEditMode(false);
     } catch (error) {
+      console.error(`Erro ao atualizar dados: ${error}`);
       alert("Erro interno. Tente novamente.");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Cancela a operação e restaura os dados originais
+  const handleCancel = () => {
+    setFormData({
+      username: user?.username || "",
+      email: user?.email || "",
+      password: "",
+    });
+
+    setEditMode(false);
   };
 
   return (
@@ -99,7 +153,7 @@ export default function User() {
               label="Username"
               id="username"
               type="text"
-              value={user?.username}
+              value={formData.username}
               onChange={handleInputChange}
               readonly={!editMode}
               disabled={!editMode}
@@ -109,7 +163,7 @@ export default function User() {
               label="Email"
               id="email"
               type="email"
-              value={user?.email}
+              value={formData.email}
               onChange={handleInputChange}
               readonly={!editMode}
               disabled={!editMode}
@@ -119,7 +173,7 @@ export default function User() {
               label="Password"
               id="password"
               type="password"
-              value={user?.password}
+              value={formData.password}
               onChange={handleInputChange}
               readonly={!editMode}
               disabled={!editMode}
@@ -132,7 +186,7 @@ export default function User() {
           <Button
             color="var(--color-primary-main)"
             label={editMode ? "Confirm" : "Change informations"}
-            onClick={handleEditMode}
+            onClick={editMode ? handleSubmit : handleEditMode}
             disabled={isLoading}
             type="submit"
           />
@@ -140,7 +194,7 @@ export default function User() {
             color="none"
             border="2px solid var(--color-primary-main)"
             label={editMode ? "Cancel" : "Sign out"}
-            onClick={editMode ? () => setEditMode(false) : handleLogout}
+            onClick={editMode ? handleCancel : handleLogout}
           />
           {!editMode && (
             <Button

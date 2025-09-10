@@ -28,7 +28,7 @@ export default function InfoField(props: InfoFieldProps) {
           type={props.type}
           name={props.id}
           id={props.id}
-          value={props.value || ""}
+          value={props.value}
           onChange={props.onChange}
           disabled={props.disabled}
           minLength={props.minLength}

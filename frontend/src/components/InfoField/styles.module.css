@@ -42,6 +42,7 @@
   width: 100%;
   font: var(--font-body-15);
   color: var(--color-neutral-grey-3);
+  z-index: 1000;
 }
 
 .inputContainer.editable input {
