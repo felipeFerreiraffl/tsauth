@@ -76,7 +76,7 @@ export default function User() {
     } catch (error) {
       alert("Erro interno. Tente novamente.");
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 
@@ -101,7 +101,8 @@ export default function User() {
               type="text"
               value={user?.username}
               onChange={handleInputChange}
-              editable={editMode}
+              readonly={!editMode}
+              disabled={!editMode}
             />
             <InfoField
               icon={icons.email}
@@ -110,7 +111,8 @@ export default function User() {
               type="email"
               value={user?.email}
               onChange={handleInputChange}
-              editable={editMode}
+              readonly={!editMode}
+              disabled={!editMode}
             />
             <InfoField
               icon={icons.padlock}
@@ -119,7 +121,8 @@ export default function User() {
               type="password"
               value={user?.password}
               onChange={handleInputChange}
-              editable={editMode}
+              readonly={!editMode}
+              disabled={!editMode}
               showEye
             />
           </div>

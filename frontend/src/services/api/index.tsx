@@ -3,13 +3,13 @@
 import { useAuth } from "../context";
 import { API_URL, type User } from "../types";
 
-const { token } = useAuth();
-
 // Atualiza um usuário
 export const updateUser = async (
   id: string | undefined,
   user: Partial<User>
 ): Promise<any> => {
+  const { token } = useAuth();
+  
   try {
     const response = await fetch(`${API_URL}/users/${id}`, {
       method: "PUT",

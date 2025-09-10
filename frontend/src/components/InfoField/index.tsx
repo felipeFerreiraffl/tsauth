@@ -7,11 +7,11 @@ type InfoFieldProps = {
   id: string;
   label: string;
   type: HTMLInputTypeAttribute;
-  editable: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   disabled?: boolean;
   showEye?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  readonly?: boolean;
   minLength?: number;
 };
 
@@ -20,7 +20,7 @@ export default function InfoField(props: InfoFieldProps) {
     <div className={styles.container}>
       <div className={styles.labelContainer}>
         <span>{props.icon}</span>
-        <label id={props.id}>{props.label}</label>
+        <label htmlFor={props.id}>{props.label}</label>
       </div>
 
       <div className={styles.inputContainer}>
@@ -28,11 +28,11 @@ export default function InfoField(props: InfoFieldProps) {
           type={props.type}
           name={props.id}
           id={props.id}
-          defaultValue={props.value}
+          value={props.value || ""}
           onChange={props.onChange}
           disabled={props.disabled}
           minLength={props.minLength}
-          contentEditable={props.editable}
+          readOnly={props.readonly}
         />
 
         <span>{props.showEye && icons.invisible}</span>
