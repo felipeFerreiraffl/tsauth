@@ -31,6 +31,7 @@ export default function InputField(props: InputFieldProps) {
           required
           disabled={props.disabled}
           minLength={props.minLength}
+          tabIndex={0}
         />
         <button
           className={`${styles.eye}`}

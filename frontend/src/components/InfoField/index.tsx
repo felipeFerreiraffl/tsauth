@@ -38,6 +38,7 @@ export default function InfoField(props: InfoFieldProps) {
           disabled={props.disabled}
           minLength={props.minLength}
           readOnly={props.readonly}
+          tabIndex={0}
         />
 
         <button type="button" onClick={props.onClick}>

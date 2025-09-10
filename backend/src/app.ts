@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Configuração do CORS
 const corsOptions: CorsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:3000,http://localhost:4173",
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type,Authorization",
   credentials: true,
