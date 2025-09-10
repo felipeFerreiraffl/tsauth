@@ -13,6 +13,7 @@ type InfoFieldProps = {
   showEye?: boolean;
   readonly?: boolean;
   minLength?: number;
+  onClick?: () => void;
 };
 
 export default function InfoField(props: InfoFieldProps) {
@@ -35,7 +36,9 @@ export default function InfoField(props: InfoFieldProps) {
           readOnly={props.readonly}
         />
 
-        <span>{props.showEye && icons.invisible}</span>
+        <button type="button" onClick={props.onClick}>
+          {props.showEye && icons.invisible}
+        </button>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export default function Login() {
   const [password, setPassword] = useState<string>(""); // Estado da senha
   const [error, setError] = useState<any>(""); // Estado das mensagens erros
   const [isLoading, setIsLoading] = useState<boolean>(false); // Estado do carregamento
-  const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não
+  const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não 
 
   const { login } = useAuth();
 

@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Login from "../../pages/Login";
 import SignUp from "../../pages/SignUp";
 import User from "../../pages/User";
+import ProtectedRoute from "../../components/ProtectedRoute";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -12,7 +13,14 @@ export default function AppRoutes() {
     <Routes key={location.pathname} location={location}>
       <Route element={<Login />} path="/" />
       <Route element={<SignUp />} path="/register" />
-      <Route element={<User />} path="/user" />
+      <Route
+        element={
+          <ProtectedRoute>
+            <User />
+          </ProtectedRoute>
+        }
+        path="/user"
+      />
     </Routes>
   );
 }

@@ -21,7 +21,8 @@ export default function User() {
     password: "",
   });
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false); // Estado de mostrar senha ou não
+  const [showPassword, setShowPassword] = useState<boolean>(false); // Estado de mostrar a senha ou não
 
   // Sempre atualiza os dados que precisar
   useEffect(() => {
@@ -134,6 +135,11 @@ export default function User() {
     setEditMode(false);
   };
 
+  // Mostra senha
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -177,6 +183,7 @@ export default function User() {
               onChange={handleInputChange}
               readonly={!editMode}
               disabled={!editMode}
+              onClick={togglePasswordVisibility}
               showEye
             />
           </div>
