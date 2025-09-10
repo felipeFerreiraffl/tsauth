@@ -150,11 +150,12 @@ export class UserService {
         delete updateData.role;
       }
 
-      // Atualiza os dados do usuário existente
-      Object.assign(existingUser, updateData);
-
       // Atualização do usuário (salva com os hooks pre("save"))
-      const updatedUser = await existingUser.save();
+      const updatedUser = await User.findByIdAndUpdate(
+        targetId,
+        { $set: updateData },
+        { new: true, runValidators: true }
+      );
 
       // Verifica se o usuário foi atualizado
       if (!updatedUser) {
