@@ -24,7 +24,11 @@ export default function InfoField(props: InfoFieldProps) {
         <label htmlFor={props.id}>{props.label}</label>
       </div>
 
-      <div className={styles.inputContainer}>
+      <div
+        className={`${styles.inputContainer} ${
+          props.readonly ? "" : styles.editable
+        }`}
+      >
         <input
           type={props.type}
           name={props.id}

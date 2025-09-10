@@ -79,10 +79,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         setToken(data.token);
         localStorage.setItem("token", data.token);
         return true;
-      } else {
-        if (response.status === 404 || response.status === 401) {
-          alert("User not found");
-        }
       }
 
       return false;
