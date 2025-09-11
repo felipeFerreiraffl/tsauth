@@ -15,7 +15,7 @@ const corsOptions: CorsOptions = {
   origin: [
     "http://localhost:3000",
     "http://localhost:4173",
-    "https://tsauth.vercel.app/",
+    "https://tsauth.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
