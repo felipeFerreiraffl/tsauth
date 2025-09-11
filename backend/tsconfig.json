@@ -22,16 +22,11 @@
 
     // Otimização e compatibilidade
     "skipLibCheck": true, // Pula a verificação dos tipos node_modules
-    "isolatedModules": true, // Compatibilidade com bundles modernos
-    "moduleDetection": "force", // Força a detecção de módulos
 
     "types": ["node", "jest"],
     "typeRoots": ["./node_modules/@types"],
     "lib": ["ES2022"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*/*.test.ts"],
-  "ts-node": {
-    "esm": true
-  }
+  "exclude": ["node_modules", "dist", "**/*.test.ts"],
 }
