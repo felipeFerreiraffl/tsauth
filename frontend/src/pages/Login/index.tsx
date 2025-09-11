@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import IcnApple from "../../assets/svgs/icons/apple.svg?react";
-import IcnFacebook from "../../assets/svgs/icons/Facebook.svg?react";
+import IcnFacebook from "../../assets/svgs/icons/facebook.svg?react";
 import IcnGoogle from "../../assets/svgs/icons/google.svg?react";
 import Button from "../../components/Button";
 import HomeIllustration from "../../components/Illustration/HomeIllustration";
